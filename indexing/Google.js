@@ -17,6 +17,7 @@ const key = {
 };
 
 export const indexing = async (urlToIndex) => {
+  //
   const jwtClient = new google.auth.JWT(
     key.client_email,
     null,
