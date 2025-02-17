@@ -1,0 +1,36 @@
+name: Puppeteer CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # خطوة لتسجيل الدخول إلى المستودع
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # خطوة لتثبيت Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # خطوة لتثبيت التبعيات
+      - name: Install dependencies
+        run: npm install
+
+      # خطوة لتشغيل اختبار Puppeteer (أو السكربت الخاص بك)
+      - name: Run Puppeteer script
+        run: node your-puppeteer-script.js
+
+      # خطوة لإغلاق المتصفح (إذا لزم الأمر)
+      - name: Clean up
+        run: killall chrome || true
