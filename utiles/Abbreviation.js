@@ -1,9 +1,9 @@
-// import { PostToFacebookPage } from "../SocialMedia/Facebook.js";
 // import { indexing } from "../indexing/Google.js";
 // import { submitToBing } from "../indexing/microsoft.js";
 
 import { InsertDataToDb } from "../Curd/Inserttodb.js";
 import { News } from "../model/News.js";
+import { PublishToSocialMedia } from "../SocialMedia/PublishToSocialMedia.js";
 import { rewriteScence } from "./Rewrite.js";
 
 // قائمة المتصفحات
@@ -59,7 +59,12 @@ const processLink = async (page, link, itemSelector, name, category) => {
         category,
         desc: paragraphs,
       };
-      await InsertDataToDb(data);
+      const saved = await InsertDataToDb(data);
+      await PublishToSocialMedia(
+        saved.title,
+        saved.img,
+        `https://asfourah.vercel.app/news/${saved._id}`
+      );
     }
   } catch (error) {
     console.error("Error processing link:", error);
