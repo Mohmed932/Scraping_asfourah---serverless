@@ -59,11 +59,11 @@ const processLink = async (page, link, itemSelector, name, category) => {
         category,
         desc: paragraphs,
       };
-      const saved = await InsertDataToDb(data);
+      const SavedData = await InsertDataToDb(data);
       await PublishToSocialMedia(
-        saved.title,
-        saved.img,
-        `https://asfourah.vercel.app/news/${saved._id}`
+        SavedData.title,
+        SavedData.img,
+        `https://asfourah.vercel.app/news/${SavedData._id}`
       );
     }
   } catch (error) {
