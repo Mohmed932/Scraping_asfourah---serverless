@@ -11,10 +11,10 @@ const app = express();
 
 // routes
 app.get("/", (req, res) => {
+  PuppeteerScraping();
   res.send("Render Puppeteer server is up and running!");
 });
 // puppeteer scraping
-PuppeteerScraping();
 
 app.use("*", (req, res) => {
   res.status(404).json("this page not found");
